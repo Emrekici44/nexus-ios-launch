@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "Nexus",
+    "slug": "nexus-ios",
+    "owner": "emrekici",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "nexus",
+    "platforms": [
+      "ios"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "de.emreekici.nexus",
+      "buildNumber": "1",
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Nexus verwendet Face ID, um deine persönlichen Inhalte zu schützen."
+      }
+    },
+    "plugins": [
+      "expo-secure-store",
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Nexus verwendet Face ID, um deine persönlichen Inhalte zu schützen."
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#07111f"
+        }
+      ]
+    ],
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d36b581e-d0b5-4c10-a094-633018af6edd"
+      }
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
