@@ -25,7 +25,7 @@ export default function App() {
   const [unlocked, setUnlocked] = useState(false);
   const [webRelease, setWebRelease] = useState<string | null>(null);
 
-  const unlock = useCallback(async (enabled = faceIdEnabled) => {
+  const unlock = useCallback(async (enabled: boolean) => {
     if (authRunningRef.current) return;
     if (!enabled) {
       setUnlocked(true);
@@ -52,7 +52,7 @@ export default function App() {
     } finally {
       authRunningRef.current = false;
     }
-  }, [faceIdEnabled]);
+  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -71,9 +71,11 @@ export default function App() {
     const subscription = AppState.addEventListener('change', (nextState) => {
       const previous = appStateRef.current;
       appStateRef.current = nextState;
-      if (faceIdEnabled && nextState !== 'active') setUnlocked(false);
-      if (nextState === 'active' && previous !== 'active') {
-        void unlock();
+      if (faceIdEnabled && nextState === 'background') {
+        setUnlocked(false);
+      }
+      if (nextState === 'active' && previous === 'background') {
+        void unlock(faceIdEnabled);
         void webViewRef.current?.checkForWebUpdate();
       }
     });
@@ -98,7 +100,7 @@ export default function App() {
         <Text style={styles.lockTitle}>Nexus</Text>
         <Text style={styles.lockText}>Dein persönlicher Bereich ist geschützt.</Text>
         {preferencesReady ? (
-          <Pressable style={styles.unlockButton} onPress={() => void unlock()}>
+          <Pressable style={styles.unlockButton} onPress={() => void unlock(faceIdEnabled)}>
             <Text style={styles.unlockButtonText}>Mit Face ID entsperren</Text>
           </Pressable>
         ) : null}
@@ -138,7 +140,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  app: { flex: 1, backgroundColor: '#07111f' },
+  app: { flex: 1, backgroundColor: '#000000' },
   settingsButton: {
     position: 'absolute',
     top: 54,
@@ -148,17 +150,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: '#34506a',
+    borderColor: '#2a2a2a',
     borderRadius: 21,
-    backgroundColor: 'rgba(7, 17, 31, 0.88)',
+    backgroundColor: 'rgba(0, 0, 0, 0.92)',
   },
-  settingsGlyph: { marginTop: -6, color: '#dff2ff', fontSize: 20, fontWeight: '900', letterSpacing: 1 },
+  settingsGlyph: { marginTop: -6, color: '#ffffff', fontSize: 20, fontWeight: '900', letterSpacing: 1 },
   lockScreen: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 28,
-    backgroundColor: '#07111f',
+    backgroundColor: '#000000',
   },
   logo: { width: 86, height: 86, marginBottom: 24 },
   tile: { position: 'absolute', borderRadius: 12 },
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
   tileTop: { right: 0, top: 0, width: 27, height: 27, backgroundColor: '#0c79d8' },
   tileBottom: { right: 0, bottom: 0, width: 53, height: 53, backgroundColor: '#68c4ff' },
   lockTitle: { color: '#ffffff', fontSize: 34, fontWeight: '900' },
-  lockText: { marginTop: 9, color: '#9db0c3', fontSize: 16, textAlign: 'center' },
+  lockText: { marginTop: 9, color: '#a1a1aa', fontSize: 16, textAlign: 'center' },
   unlockButton: {
     minWidth: 230,
     marginTop: 30,
