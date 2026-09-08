@@ -81,7 +81,7 @@ export function SettingsSheet({
         <View style={styles.infoCard}>
           <Text style={styles.infoLabel}>Native App</Text>
           <Text style={styles.infoValue}>
-            {Application.nativeApplicationVersion ?? '0.1.0'} ({Application.nativeBuildVersion ?? '1'})
+            {Application.nativeApplicationVersion ?? '0.1.1'} ({Application.nativeBuildVersion ?? '2'})
           </Text>
           <Text style={[styles.infoLabel, styles.infoSpacing]}>Nexus-Webstand</Text>
           <Text style={styles.infoValue}>{releaseLabel(webRelease)}</Text>
