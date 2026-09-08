@@ -3,8 +3,9 @@
     "name": "Nexus",
     "slug": "nexus-ios",
     "owner": "emrekici",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "orientation": "portrait",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "scheme": "nexus",
     "platforms": [
@@ -13,7 +14,8 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.emreekici.nexus",
-      "buildNumber": "1",
+      "buildNumber": "2",
+      "icon": "./assets/icon.png",
       "config": {
         "usesNonExemptEncryption": false
       },
@@ -32,7 +34,10 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#07111f"
+          "backgroundColor": "#07111f",
+          "image": "./assets/icon.png",
+          "imageWidth": 180,
+          "resizeMode": "contain"
         }
       ]
     ],
