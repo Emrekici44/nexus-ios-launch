@@ -8,7 +8,13 @@ import {
   View,
 } from 'react-native';
 import { WebView, type WebViewNavigation } from 'react-native-webview';
-import { NEXUS_ORIGIN, NEXUS_URL, STORAGE_KEYS, VERSION_URL } from './config';
+import {
+  CURRENT_WEB_VERSION,
+  NEXUS_ORIGIN,
+  NEXUS_URL,
+  STORAGE_KEYS,
+  VERSION_URL,
+} from './config';
 import { readText, writeText } from './native-storage';
 
 export type NexusWebViewHandle = {
@@ -21,7 +27,7 @@ export type NexusWebViewProps = {
   onReleaseChange: (releaseId: string | null) => void;
 };
 
-type VersionResponse = { releaseId?: unknown };
+type VersionResponse = { releaseId?: unknown; version?: unknown };
 
 function freshUrl(reason: string) {
   const url = new URL(NEXUS_URL);
@@ -69,8 +75,13 @@ export const NexusWebView = forwardRef<NexusWebViewHandle, NexusWebViewProps>(
         });
         if (!response.ok) return;
         const data = (await response.json()) as VersionResponse;
-        const releaseId = typeof data.releaseId === 'string' ? data.releaseId : null;
-        onReleaseChange(releaseId);
+        const releaseId =
+          typeof data.releaseId === 'string' ? data.releaseId : null;
+        const version =
+          typeof data.version === 'string' || typeof data.version === 'number'
+            ? String(data.version)
+            : CURRENT_WEB_VERSION;
+        onReleaseChange(version);
         if (!releaseId) return;
 
         const previous = await readText(STORAGE_KEYS.lastWebRelease);
@@ -162,8 +173,8 @@ export const NexusWebView = forwardRef<NexusWebViewHandle, NexusWebViewProps>(
 );
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#07111f' },
-  webView: { flex: 1, backgroundColor: '#07111f' },
+  root: { flex: 1, backgroundColor: '#000000' },
+  webView: { flex: 1, backgroundColor: '#000000' },
   loading: {
     position: 'absolute',
     top: 0,
@@ -173,7 +184,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 14,
-    backgroundColor: '#07111f',
+    backgroundColor: '#000000',
   },
   loadingText: { color: '#cbd8e6', fontSize: 15, fontWeight: '600' },
   errorPanel: {
@@ -186,7 +197,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 14,
     padding: 28,
-    backgroundColor: '#07111f',
+    backgroundColor: '#000000',
   },
   errorTitle: { color: '#ffffff', fontSize: 24, fontWeight: '800', textAlign: 'center' },
   errorText: { color: '#aebed0', fontSize: 16, lineHeight: 23, textAlign: 'center' },
