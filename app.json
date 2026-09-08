@@ -12,7 +12,7 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "de.emreekici.nexus",
+      "bundleIdentifier": "com.emreekici.nexus",
       "buildNumber": "1",
       "config": {
         "usesNonExemptEncryption": false
