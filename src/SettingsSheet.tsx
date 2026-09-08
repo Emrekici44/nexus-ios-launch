@@ -21,9 +21,9 @@ type Props = {
   onResetCache: () => void;
 };
 
-function releaseLabel(releaseId: string | null) {
-  if (!releaseId) return 'wird beim Start geprüft';
-  return releaseId.length > 28 ? `${releaseId.slice(0, 25)}…` : releaseId;
+function releaseLabel(version: string | null) {
+  if (!version) return 'wird beim Start geprüft';
+  return `Version ${version}`;
 }
 
 export function SettingsSheet({
@@ -54,7 +54,13 @@ export function SettingsSheet({
               <Text style={styles.rowTitle}>Mit Face ID schützen</Text>
               <Text style={styles.rowSubtitle}>Beim Öffnen und nach dem App-Wechsel entsperren.</Text>
             </View>
-            <Switch value={faceIdEnabled} onValueChange={onFaceIdChange} />
+            <Switch
+              value={faceIdEnabled}
+              onValueChange={onFaceIdChange}
+              trackColor={{ false: '#3f3f46', true: '#ffffff' }}
+              thumbColor={faceIdEnabled ? '#000000' : '#ffffff'}
+              ios_backgroundColor="#3f3f46"
+            />
           </View>
         </View>
 
@@ -89,7 +95,7 @@ export function SettingsSheet({
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: '#07111f' },
+  safeArea: { flex: 1, backgroundColor: '#000000' },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -98,29 +104,29 @@ const styles = StyleSheet.create({
     paddingTop: 18,
     paddingBottom: 20,
   },
-  eyebrow: { color: '#68c4ff', fontSize: 12, fontWeight: '900', letterSpacing: 1.4 },
+  eyebrow: { color: '#a1a1aa', fontSize: 12, fontWeight: '900', letterSpacing: 1.4 },
   title: { marginTop: 5, color: '#ffffff', fontSize: 26, fontWeight: '800' },
   closeButton: { paddingHorizontal: 12, paddingVertical: 10 },
-  closeButtonText: { color: '#68c4ff', fontSize: 16, fontWeight: '800' },
+  closeButtonText: { color: '#ffffff', fontSize: 16, fontWeight: '800' },
   card: {
     marginHorizontal: 18,
     marginBottom: 14,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: '#29415a',
+    borderColor: '#292929',
     borderRadius: 17,
-    backgroundColor: '#0e1d2d',
+    backgroundColor: '#111111',
     overflow: 'hidden',
   },
   row: { flexDirection: 'row', alignItems: 'center', gap: 16, padding: 18 },
   rowText: { flex: 1 },
   rowTitle: { color: '#ffffff', fontSize: 17, fontWeight: '700' },
-  rowSubtitle: { marginTop: 5, color: '#9db0c3', fontSize: 14, lineHeight: 20 },
+  rowSubtitle: { marginTop: 5, color: '#a1a1aa', fontSize: 14, lineHeight: 20 },
   action: { paddingHorizontal: 18, paddingVertical: 17 },
-  actionText: { color: '#e9f4ff', fontSize: 16, fontWeight: '700' },
-  separator: { height: StyleSheet.hairlineWidth, marginLeft: 18, backgroundColor: '#29415a' },
+  actionText: { color: '#f4f4f5', fontSize: 16, fontWeight: '700' },
+  separator: { height: StyleSheet.hairlineWidth, marginLeft: 18, backgroundColor: '#292929' },
   infoCard: { marginHorizontal: 22, marginTop: 8 },
-  infoLabel: { color: '#7890a8', fontSize: 12, fontWeight: '800', letterSpacing: 0.7 },
-  infoValue: { marginTop: 4, color: '#cbd8e6', fontSize: 14 },
+  infoLabel: { color: '#71717a', fontSize: 12, fontWeight: '800', letterSpacing: 0.7 },
+  infoValue: { marginTop: 4, color: '#d4d4d8', fontSize: 14 },
   infoSpacing: { marginTop: 14 },
-  note: { marginTop: 20, color: '#7890a8', fontSize: 13, lineHeight: 19 },
+  note: { marginTop: 20, color: '#71717a', fontSize: 13, lineHeight: 19 },
 });
