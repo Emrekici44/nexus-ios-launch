@@ -7,8 +7,8 @@ Eigenständige iPhone-App für Nexus. Dieses Projekt ist bewusst vollständig vo
 ## Bereits vorbereitet
 
 - Expo-Projektinhaber: `emrekici`
-- iOS Bundle-ID: `de.emreekici.nexus`
-- App-Version: `0.1.0`, Build `1`
+- iOS Bundle-ID: `com.emreekici.nexus`
+- App-Version: `0.1.1`, Build `2`
 - EAS-Profile für Entwicklung, interne Vorschau und TestFlight/App Store
 - geschützter Nexus-Container mit Face ID bzw. Gerätecode
 - automatische Erkennung eines neuen Nexus-Webstands über `/api/version`
@@ -56,7 +56,7 @@ Nach dem erfolgreichen Build in App Store Connect unter **Apps → + → Neue Ap
 - Plattform: iOS
 - Name: Nexus
 - Primäre Sprache: Deutsch
-- Bundle-ID: `de.emreekici.nexus`
+- Bundle-ID: `com.emreekici.nexus`
 - SKU: `nexus-ios-001`
 
 Danach den oben genannten `eas submit`-Befehl ausführen.
