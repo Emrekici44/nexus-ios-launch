@@ -145,7 +145,7 @@ export const NexusWebView = forwardRef<NexusWebViewHandle, NexusWebViewProps>(
           setSupportMultipleWindows={false}
           sharedCookiesEnabled
           thirdPartyCookiesEnabled={false}
-          applicationNameForUserAgent="Nexus-iOS/0.1"
+          applicationNameForUserAgent="Nexus-iOS/0.1.1"
         />
 
         {loading ? (
